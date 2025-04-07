@@ -1,0 +1,6 @@
+/home/raspi4b/temp/solo/build/CMakeFiles/SoloLeveling.dir
+/home/raspi4b/temp/solo/build/CMakeFiles/edit_cache.dir
+/home/raspi4b/temp/solo/build/CMakeFiles/rebuild_cache.dir
+/home/raspi4b/temp/solo/build/libraries/CMakeFiles/CUSTOM_INCLUDE_LIBRARIES.dir
+/home/raspi4b/temp/solo/build/libraries/CMakeFiles/edit_cache.dir
+/home/raspi4b/temp/solo/build/libraries/CMakeFiles/rebuild_cache.dir

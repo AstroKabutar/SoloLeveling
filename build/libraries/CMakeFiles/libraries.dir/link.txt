@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibraries.a CMakeFiles/libraries.dir/Mysql.cpp.o
+/usr/bin/ranlib liblibraries.a
