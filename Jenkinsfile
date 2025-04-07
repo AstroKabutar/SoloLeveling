@@ -4,22 +4,22 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Building project..."
-                // Add your build steps here (e.g., running a shell command)
-                echo $pwd
+                // Correctly using pwd() function in Groovy
+                echo "Current working directory: ${pwd()}"
             }
         }
         stage('Test') {
             steps {
                 echo "Running tests..."
-                // Add your test steps here (e.g., running a test command)
-                echo $USER
+                // Accessing environment variables correctly in Groovy
+                echo "User: ${env.USER}"    // Correct way to access environment variable
             }
         }
         stage('Deploy') {
             steps {
                 echo "Deploying project..."
-                // Add your deploy steps here (e.g., deploying to a server)
-                echo $SHELL
+                // Accessing environment variable for the shell
+                echo "Shell: ${env.SHELL}"
             }
         }
     }
