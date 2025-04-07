@@ -1,0 +1,8 @@
+services:
+  db_mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Secure
+      - MYSQL_DATABASE=Global
+    ports:
+      - 8000:3306
