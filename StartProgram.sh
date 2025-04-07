@@ -38,11 +38,10 @@ done
 cd ..
 
 # begin running the executable
-cp build/SoloLeveling .
+#cp build/SoloLeveling .
 source ENV/Mysql.env
-./SoloLeveling
+./build/SoloLeveling
 #valgrind --leak-check=full ./SoloLeveling  
 
 # cleaning up 
-#rm SoloLeveling
 #docker compose down
