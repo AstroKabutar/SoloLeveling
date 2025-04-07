@@ -88,7 +88,7 @@ T Mysql::getdata(const sql::SQLString& statement, const Data& d)
         break;
 
         case Data::tasks:
-            os << res->getString("tasks"); // convertion from sqlstring to std::string
+            os << res->getString("tasks");
             os >> what;
         break;
 

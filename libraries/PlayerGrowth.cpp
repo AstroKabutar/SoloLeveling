@@ -149,8 +149,6 @@ void PlayerGrowth::updatexp(std::string tid)
     sql_querry = Auxiliary::replace(sql_querry, "?", task);
     querry = sql_querry;
     pg_mysql.querry(sql_querry);
-
-    sql_querry = "";
 }
 
 /*

@@ -10,7 +10,7 @@ set(SQL_CONNECTION_HEADER /usr/include)
 set(CUSTOM_INCLUDES "${CMAKE_SOURCE_DIR}/include")
 
 # set target link libraries
-set(SQL_CONNECTION_LIB /usr/lib/aarch64-linux-gnu/libmysqlcppconn.a)      # aarch gnu for rasberry pi cpu
+set(SQL_CONNECTION_LIB /usr/lib/aarch64-linux-gnu/libmysqlcppconn.so)      # aarch gnu for rasberry pi
 #file(GLOB_RECURSE CUSTOM_INCLUDE_LIBRARIES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/libraries/*.cpp")     # add all library
 
 
@@ -28,4 +28,4 @@ add_subdirectory(libraries)
 
 # Link libraries to the final executable
 target_link_libraries(SoloLeveling PRIVATE ${SQL_CONNECTION_LIB})
-target_link_libraries(SoloLeveling PRIVATE ${CUSTOM_INCLUDE_LIBRARIES})
+target_link_libraries(SoloLeveling PRIVATE CUSTOM_INCLUDE_LIBRARIES)
