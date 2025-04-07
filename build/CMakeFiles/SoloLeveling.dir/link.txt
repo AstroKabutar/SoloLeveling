@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/SoloLeveling.dir/main.cpp.o -o SoloLeveling  -Wl,-rpath,/home/raspi4b/temp/solo/build/libraries /usr/lib/aarch64-linux-gnu/libmysqlcppconn.so libraries/libCUSTOM_INCLUDE_LIBRARIES.so 
