@@ -17,7 +17,7 @@ private:
 
     // DB table levels
     int p_level{2};
-    double p_xp_required{30};
+    double p_xp_required{10};
 
     // DB table player progression
     double p_current_xp{3.48};

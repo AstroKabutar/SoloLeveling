@@ -68,69 +68,90 @@ void PlayerGrowth::completetask(int taskid)
 
 /*
 1
-select 
-tasks.task_id, 
-tasks.tasks, 
+select tasks.task_id, 
+tasks.tasks,
 importance.xp_gain as reward,
-xp_transactions.xp_gained as currentxp
-from players
-inner join tasks on tasks.player_id = players.player_id
-inner join importance on tasks.importance = importance.class
-inner join xp_transactions on xp_transactions.player_id = players.player_id
-where tasks.task_id like 8
+player_progression.current_xp as currentxp
+from players inner join tasks on 
+tasks.player_id = players.player_id inner join
+importance on tasks.importance = importance.class inner join
+player_progression on player_progression.player_id = players.player_id
+where tasks.task_id like 2
 
 2
-select 
-levels.xp_required,
-levels.level
-from levels
-inner join tasks on tasks.player_id = levels.player_id
-where tasks.task_id like 8
+select player_progression.current_level as level from player_progression 
+inner join tasks on tasks.player_id = player_progression.player_id 
+where tasks.task_id like 7
 
 3
+select levels.xp_required from levels 
+inner join tasks on tasks.player_id = levels.player_id 
+where tasks.task_id like 8
+
+4
 update levels
 inner join tasks on tasks.player_id = levels.player_id
 set level = 3,
 xp_required = 60
 where tasks.task_id like 8
 
-4
+5
+update player_progression
+set current_level = 3
+where player_id = 1
+
+6
 insert into 
 xp_transactions(player_id, xp_gained, transaction_date, tasks_completed)
 values(4, 52.66, 'dsfsdf dsfsdf', 'done') 
+
+7
+update player_progression set current_level = 3,
+current_xp = 30 
+where player_id like 2;
 */
 void PlayerGrowth::updatexp(std::string tid)
 {
     std::string sql_querry{};
     sql::SQLString querry{};
     std::string pid{Auxiliary::convert<int, std::string>(pg_pid, Util::tostring)};
+    double xp_gained{};
 
-    sql_querry = "select tasks.task_id, tasks.tasks, importance.xp_gain as reward, xp_transactions.xp_gained as currentxp from players inner join tasks on tasks.player_id = players.player_id inner join importance on tasks.importance = importance.class inner join xp_transactions on xp_transactions.player_id = players.player_id where tasks.task_id like " + tid;
+    //sql_querry = "select tasks.task_id, tasks.tasks, importance.xp_gain as reward, xp_transactions.xp_gained as currentxp from players inner join tasks on tasks.player_id = players.player_id inner join importance on tasks.importance = importance.class inner join xp_transactions on xp_transactions.player_id = players.player_id where tasks.task_id like " + tid;
+    sql_querry = "select tasks.task_id, tasks.tasks, importance.xp_gain as reward, player_progression.current_xp as currentxp from players inner join tasks on tasks.player_id = players.player_id inner join importance on tasks.importance = importance.class inner join player_progression on player_progression.player_id = players.player_id where tasks.task_id like " + tid;
     querry = sql_querry;
 
     // get tasks reward and currentxp from database
-    std::string task{pg_mysql.getdata<std::string>(querry, Data::tasks)};
+    std::string task{pg_mysql.getdata<std::string>(querry, Data::tasks)};   // <---- not getting full task string
     double reward{pg_mysql.getdata<double>(querry, Data::reward)};
     double currentxp{pg_mysql.getdata<double>(querry, Data::currentxp)};
 
+    //xp gained
+    xp_gained = (reward * currentxp) / 100;
+
     // new rewarded xp
-    currentxp += (reward * currentxp) / 100;
+    currentxp += xp_gained;
 
     // check to see if player leveled
-    sql_querry = "select levels.xp_required, levels.level from levels inner join tasks on tasks.player_id = levels.player_id where tasks.task_id like " + tid;
+    sql_querry = "select player_progression.current_level as level from player_progression inner join tasks on tasks.player_id = player_progression.player_id where tasks.task_id like " + tid;
     querry = sql_querry;
-
-    double xp_required{pg_mysql.getdata<double>(querry, Data::xp_required)};
     int level{pg_mysql.getdata<int>(querry, Data::level)};
 
+    sql_querry = "select levels.xp_required from levels inner join tasks on tasks.player_id = levels.player_id where tasks.task_id like " + tid;
+    querry = sql_querry;
+    double xp_required{pg_mysql.getdata<double>(querry, Data::xp_required)};
+    
+
+    std::cout << "Current xp - " << currentxp << " XP_Required - " << xp_required << " Current level " << level << '\n';
+    
     if(currentxp >= xp_required)
     {
         std::cout << "Leveled up!!!\n";
         ++level;
 
         // new threshold
-        xp_required += (30 * xp_required) / 100;
-        currentxp = 0;
+        xp_required += (30 * xp_required) / 100 + 8;
+        currentxp = 1;
 
         // update the new level and xp in database
         sql_querry = "update levels inner join tasks on tasks.player_id = levels.player_id set level = '?', xp_required = '?' where tasks.task_id like " + tid;
@@ -138,15 +159,31 @@ void PlayerGrowth::updatexp(std::string tid)
         sql_querry = Auxiliary::replace(sql_querry, "?", xp_required);
         querry = sql_querry;
         pg_mysql.querry(sql_querry);
+
+        sql_querry = "update player_progression set current_level = ? where player_id = ?";
+        sql_querry = Auxiliary::replace(sql_querry, "?", level);
+        sql_querry = Auxiliary::replace(sql_querry, "?", pid);
+
+        std::cout << "Current xp - " << currentxp << " XP_Required - " << xp_required << " Current level " << level << '\n';
     }
 
-    // inserting updated data
+    std::cout << "Current xp - " << currentxp << " XP_Required - " << xp_required << " Current level " << level << '\n';
+
+    // inserting updated data into xp_transactions
     std::string date{Auxiliary::getDate()};
     sql_querry = "insert into xp_transactions(player_id, xp_gained, transaction_date, tasks_completed) values('?', '?', '?', '?')";
     sql_querry = Auxiliary::replace(sql_querry, "?", pid);
-    sql_querry = Auxiliary::replace(sql_querry, "?", currentxp);
+    sql_querry = Auxiliary::replace(sql_querry, "?", xp_gained);
     sql_querry = Auxiliary::replace(sql_querry, "?", date);
     sql_querry = Auxiliary::replace(sql_querry, "?", task);
+    querry = sql_querry;
+    pg_mysql.querry(sql_querry);
+
+    // inserting updated data into player_progression
+    sql_querry = "update player_progression set current_level = ?, current_xp = ? where player_id like ?;";
+    sql_querry = Auxiliary::replace(sql_querry, "?", level);
+    sql_querry = Auxiliary::replace(sql_querry, "?", currentxp);
+    sql_querry = Auxiliary::replace(sql_querry, "?", pid);
     querry = sql_querry;
     pg_mysql.querry(sql_querry);
 }

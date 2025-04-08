@@ -6,13 +6,14 @@ clear
 #docker compose up -d
 
 # trigger cmake compilation
+#rm -r build
 mkdir -p build
 cd build
 cmake ..
 make
 
 # delay for letting the database to start
-time=5;
+time=3;
 
 # waiting time for the mysql docker container to start up
 for((i=time; ; --i)); do

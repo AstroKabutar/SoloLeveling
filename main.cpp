@@ -79,7 +79,7 @@ int main()
         // when we need to set the task to be completed
         // -----------get a list of task this player has-------- 1 DONE
         // -----------task completance using task id ----------- 2 DONE
-        // -----------xp calculation based above --------------- 3
+        // -----------xp calculation based above --------------- 3 DONE
 
         ++i;
     }
