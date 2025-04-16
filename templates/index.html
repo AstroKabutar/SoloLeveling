@@ -8,9 +8,30 @@
 </head>
 
 <body class="background">
+
+<div class="video-background">
+  <video autoplay loop playsinline class="gif-like-video">
+    <source src="/static/video/bg.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+<section>
+<form action="http://192.168.0.20:8000/new_player" method="POST">
 <div class="heading">Welcome!!<br>Want to level up your game?
     <div class="glass" ></div>
+    <div class="form"><a href="/post">Already a player</a></div>
+    <br>
+    <div class="form_body" style="left: 0%;">New Player</div><br>
+    <div class="form_body">Name: 
+      <input type="text" class="in" name="name">
+    </div><br>
+    <div class="form_body" style="left: -17.5%;">Date of Birth: 
+      <input type="date" class="in" name="dob" style="left: 24%;"> <br> <br>
+      <button type="submit" class="button">Submit</button>
+    </div>
 </div>
-
+</form>
+</section>
 </body>
 </html>
+

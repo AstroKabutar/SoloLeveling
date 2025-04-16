@@ -35,7 +35,7 @@ int main()
     });
 
     // Handle POST request at /submit
-    app.route_dynamic("/")
+    app.route_dynamic("/new_player")
     .methods("POST"_method)
     ([](const crow::request& req){
         // Retrieve the raw body data (form data)
@@ -48,7 +48,6 @@ int main()
         // We can manually parse the body as key-value pairs: given in id in html
         std::string name;
         std::string email;
-        std::string message;
 
         // Split body by '&' to get key-value pairs
         std::istringstream stream(body);
@@ -61,18 +60,15 @@ int main()
 
                 if (key == "name") {
                     name = value;
-                } else if (key == "email") {
+                } else if (key == "dob") {
                     email = value;
-                } else if (key == "message") {
-                    message = value;
                 }
             }
         }
 
         // Output the parsed data
         std::cout << "Name: " << name << std::endl;
-        std::cout << "Email: " << email << std::endl;
-        std::cout << "Message: " << message << std::endl;
+        std::cout << "DOB: " << email << std::endl;
 
         // Respond back with a simple success message
         return crow::response("Form submitted successfully!");
