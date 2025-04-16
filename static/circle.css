@@ -1,0 +1,43 @@
+.circle1, .circle2, .circle3
+{
+    background: rgb(69, 180, 17);
+    
+    background: linear-gradient(to top right,
+    rgba(85, 212, 12, 0.7),
+    rgba(179, 87, 12, 0.5),
+    rgba(150, 9, 9, 0.366)
+    );
+
+    backdrop-filter: blur(6px);
+
+    height: 20rem;
+    width: 20rem;
+
+    border-radius: 50%;
+
+        position: absolute;
+}
+
+.circle1
+{
+    right: 200px;
+    top: 40px;
+    width: 20rem;
+    height: 20rem;
+    border-radius: 40%;
+}
+
+.circle2
+{
+    top: 760px;
+    right: 70px;
+    backdrop-filter: blur(2px);
+}
+
+.circle3
+{
+    top: 400px;
+    left: 160px;
+    width: 25rem;
+}
+

@@ -1,0 +1,99 @@
+.background
+{
+    background:rgba(97, 97, 97, 0.7)
+}
+
+.heading
+{
+    position: absolute;
+
+    top: 4.2%;
+    left: 2%;
+
+    width: 95%;
+    height: 15%;
+    background: linear-gradient(to right bottom,
+    rgba(6, 218, 233, 0.5),
+    rgba(167, 4, 231, 0.959)
+    );
+
+    backdrop-filter: blur(2px);
+
+    text-align: center;
+    font-size: 50px;
+    text-shadow: 2px 2px 5px;
+    border-radius: 3rem;
+
+
+    z-index: 1;
+}
+
+.shadow_new
+{
+    text-shadow: 1px 1px 20px;
+}
+
+.shadow_new_cursor
+{
+    position: absolute;
+    top: 28%;
+    left: 100%;
+    background: rgb(0, 0, 0);
+    width: 0.4rem;
+    height: 2rem;
+    box-shadow: 1px 1px 20px;
+}
+
+.glass
+{
+    background: rgb(173, 147, 29);
+    width: 95%;
+    height: 400%;
+
+    position: relative;
+    top: 70%;
+    left: 2%;
+
+    background: linear-gradient(to left top,
+    rgba(6, 218, 233, 0.5),
+    rgba(167, 4, 231, 0.959)
+    );
+
+    backdrop-filter: blur(6px);
+    border-radius: 4rem;
+    z-index: 1;
+
+    display: flex;
+    justify-content: end;
+}
+
+.form
+{
+    position: relative;
+    left: 0px;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: start;
+    font-weight: 500;
+}
+
+.in
+{
+    border: 1px solid black;
+    min-width: 40px;
+    border-radius: 2rem;
+    min-height: 22px;
+}
+
+.inputs
+{
+    position: absolute;
+    right: 50px;
+    top: 33px;
+}
+
+a:hover
+{
+    color: aquamarine;
+    font-size: 50px;
+}
