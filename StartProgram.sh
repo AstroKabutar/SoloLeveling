@@ -42,7 +42,7 @@ cd ..
 #cp build/SoloLeveling .
 source ENV/Mysql.env
 ./build/SoloLeveling
-#valgrind --leak-check=full ./SoloLeveling  
+#valgrind --leak-check=full ./SoloLeveling
 
-# cleaning up 
+# cleaning up
 #docker compose down

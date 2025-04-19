@@ -1,0 +1,135 @@
+.background
+{
+    background-color: rgba(77, 10, 10, 0.671);
+    background-image: url("/static/img/solo_leveling.png");
+    overflow: hidden;
+
+    margin: 0; /* remove default margin */
+    padding: 0;
+    height: 100vh; /* full height of the viewport */
+    background-size: cover;       /* scales image to cover the screen */
+    background-repeat: no-repeat; /* prevents tiling */
+    background-position: center;  /* keeps image centered */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Optional: prevents scrollbars */
+}
+
+.form_body
+{
+    position: relative;
+    top: 0%;
+    left: -10%;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 1px 1px 30px;
+    color:rgb(33, 210, 241);
+
+    z-index: 1;
+}
+
+.form
+{
+    position: relative;
+    top: -300%;
+    font-size: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    
+
+    z-index: 1;
+}
+
+.button
+{
+    position: relative;
+    top: -300%;
+    left: 30%;
+    z-index: 1;
+    min-width: 150px;
+    font-size: 20px;
+    box-shadow: 1px 1px 40px rgb(189, 15, 180);
+}
+
+a {
+    color: rgb(189, 15, 180);
+    text-decoration: dotted;
+    text-shadow: 4px 4px 30px;
+    font-weight: 700;
+    position: relative;
+    top: 70px;
+    left: -30px;
+  }
+
+.in
+{
+    position: relative;
+    top: -300%;
+    left: 30%;
+    border: 1px solid rgb(33, 210, 241);
+    text-align: center;
+    min-width: 250px;
+    border-radius: 2rem;
+    min-height: 30px;
+    z-index: 1;
+    box-shadow: 1px 1px 40px rgb(33, 210, 241);
+}
+
+.heading
+{
+    position: absolute;
+
+    top: 10.2%;
+    left: 2%;
+
+    width: 95%;
+    height: 600px;
+    background: linear-gradient(to right bottom,
+    rgba(206, 36, 212, 0.329),
+    rgba(9, 215, 230, 0.384)
+    );
+
+    backdrop-filter: blur(2px);
+
+    text-align: center;
+    color: rgb(189, 15, 180);
+    font-weight: 200;
+    font-size: 50px;
+    text-shadow: 2px 2px 15px;
+    border-radius: 3rem;
+
+
+    z-index: 1;
+}
+
+.glass
+{
+    background: rgba(192, 192, 192, 0.356);
+    width: 50%;
+    height: 50%;
+
+    position: relative;
+    top: 70%;
+    left: 2%;
+
+    background: linear-gradient(to left top,
+    rgba(206, 209, 209, 0.274),
+    rgba(54, 53, 54, 0.349)
+    );
+
+    backdrop-filter: blur(6px);
+    border-radius: 4rem;
+    z-index: 1;
+
+    display: flex;
+    justify-content: end;
+}

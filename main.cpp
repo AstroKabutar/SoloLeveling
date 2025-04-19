@@ -1,6 +1,6 @@
 #include <string_view>
-
 #include <iostream>
+#include <sstream>
 #include <crow.h>
 #include <Mysql.h>
 #include <Player.h>
@@ -8,24 +8,25 @@
 #include <Setup.h>
 #include <Auxiliary.h>
 
-
-// working
-
 int main() 
 {
     crow::SimpleApp app;
+        
+    // custom made mysql database object
+    Mysql mysql{};
 
+    // Bootstrap
+    Setup bootstrap{mysql};
+
+    std::cout << "-----------------------------This is a test---------------\n";
+
+/*---------------------------------------GET REQESTS----------------------------------------------*/
 
     // Serve the HTML form dynamically at "/"
-    CROW_ROUTE(app, "/post")([]()
+    CROW_ROUTE(app, "/LoadGame")([]()
     {
-        auto page = crow::mustache::load_text("post.html");
+        auto page = crow::mustache::load_text("LoadGame.html");
         return page;
-    });
-
-    CROW_ROUTE(app, "/chillie")([]()
-    {
-        return "<h1> World is no more. </h1>";
     });
 
     CROW_ROUTE(app, "/")([]()
@@ -34,10 +35,63 @@ int main()
         return page;
     });
 
-    // Handle POST request at /submit
-    app.route_dynamic("/new_player")
+/*---------------------------------------POST REQESTS----------------------------------------------*/
+
+
+    // Handle POST reqest at /LoadGame
+    app.route_dynamic("/LoadGame")
     .methods("POST"_method)
-    ([](const crow::request& req){
+    ([&mysql](const crow::request& req)
+    {
+        // Retrieve the raw body data (form data)
+        std::string body = req.body;
+
+        // Print the raw body data (for debugging purposes)
+        std::cout << "Raw body data: " << body << std::endl;
+
+        // Now, parse the body (assuming URL-encoded data: name=John&email=john@example.com)
+        // We can manually parse the body as key-value pairs: given in id in html
+        std::string pname{};
+        std::string pid{};
+        std::stringstream os{};
+
+        // Split body by '&' to get key-value pairs
+        std::istringstream stream(body);
+        std::string pair;
+        while (std::getline(stream, pair, '&')) 
+        {
+            //std::cout << "\n-------------- " << pair <<" ----------\n";
+            size_t pos = pair.find("=");
+            if (pos != std::string::npos) 
+            {
+                std::string key = pair.substr(0, pos);
+                std::string value = pair.substr(pos + 1);
+
+                if (key == "Name") 
+                {
+                    pname = value;
+                } else if (key == "PID") 
+                {
+                    pid = value;
+                }
+            }
+        }
+
+        return R"(
+            <html>
+                <head>
+                    <script src="/static/LoadGame.js"></script>
+                </head>
+                <body></body>
+            </html>
+        )";
+    });
+
+    // Handle POST request at /
+    app.route_dynamic("/")
+    .methods("POST"_method)
+    ([&mysql](const crow::request& req)
+    {
         // Retrieve the raw body data (form data)
         std::string body = req.body;
 
@@ -47,31 +101,41 @@ int main()
         // Now, parse the body (assuming URL-encoded data: name=John&email=john@example.com)
         // We can manually parse the body as key-value pairs: given in id in html
         std::string name;
-        std::string email;
+        std::string dob;
 
         // Split body by '&' to get key-value pairs
         std::istringstream stream(body);
         std::string pair;
-        while (std::getline(stream, pair, '&')) {
+        while (std::getline(stream, pair, '&')) 
+        {
+            //std::cout << "\n-------------- " << pair <<" ----------\n";
             size_t pos = pair.find("=");
-            if (pos != std::string::npos) {
+            if (pos != std::string::npos) 
+            {
                 std::string key = pair.substr(0, pos);
                 std::string value = pair.substr(pos + 1);
 
-                if (key == "name") {
+                if (key == "name") 
+                {
                     name = value;
-                } else if (key == "dob") {
-                    email = value;
+                } else if (key == "dob") 
+                {
+                    dob = value;
                 }
             }
         }
 
-        // Output the parsed data
-        std::cout << "Name: " << name << std::endl;
-        std::cout << "DOB: " << email << std::endl;
+        // create player object to put in DB
+        Player player(name, dob, mysql);
 
-        // Respond back with a simple success message
-        return crow::response("Form submitted successfully!");
+        return R"(
+            <html>
+                <head>
+                    <script src="/static/index.js"></script>
+                </head>
+                <body></body>
+            </html>
+        )";
     });
 
     // Run the server on port 8000
