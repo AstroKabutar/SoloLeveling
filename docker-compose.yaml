@@ -5,4 +5,4 @@ services:
       - MYSQL_ROOT_PASSWORD=Secure
       - MYSQL_DATABASE=Global
     ports:
-      - 8000:3306
+      - 8001:3306

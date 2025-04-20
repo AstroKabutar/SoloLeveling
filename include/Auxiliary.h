@@ -13,6 +13,7 @@ public:
     static std::string replace(std::string_view str, std::string_view mark, std::string_view replace);
     static std::string replace(std::string_view str, std::string_view mark, int replace);
     static std::string replace(std::string_view str, std::string_view mark, double replace);
+    static std::string replace_all(std::string_view str, char mark, char replace);
 
     // get current date and time from system
     static std::string getDate();

@@ -4,6 +4,16 @@
 #include <fstream>
 #include <Auxiliary.h>
 
+std::string Auxiliary::replace_all(std::string_view str, char mark, char replace)
+{
+    std::string name{str}; 
+    for(auto character{std::begin(name)}; character != std::end(name); ++character)
+    {
+        if(*character == mark)   {  *character = replace;   }
+    }
+    return name;
+}
+
 std::string Auxiliary::replace(std::string_view str, std::string_view mark, std::string_view replace)
 {
     std::string source{str};

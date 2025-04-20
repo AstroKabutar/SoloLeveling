@@ -18,7 +18,12 @@ int main()
     // Bootstrap
     Setup bootstrap{mysql};
 
-    std::cout << "-----------------------------This is a test---------------\n";
+    // getting crowport hosting from env file
+    const char* crow_port_env{std::getenv("HTTP_PORT")};
+    std::stringstream os{};
+    os << crow_port_env;
+    std::uint16_t crow_port_env_int {};
+    os >> crow_port_env_int;
 
 /*---------------------------------------GET REQESTS----------------------------------------------*/
 
@@ -118,7 +123,9 @@ int main()
                 if (key == "name") 
                 {
                     name = value;
-                } else if (key == "dob") 
+                    name = Auxiliary::replace_all(name, '+', ' ');
+                }
+                else if (key == "dob") 
                 {
                     dob = value;
                 }
@@ -138,8 +145,8 @@ int main()
         )";
     });
 
-    // Run the server on port 8000
-    app.port(8000).multithreaded().run();
+    // Run the server on port xxxxx
+    app.port(crow_port_env_int).multithreaded().run();
 }
 
 
