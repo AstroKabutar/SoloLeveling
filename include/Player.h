@@ -34,6 +34,9 @@ private:
 public:
     Player(std::string_view pname, std::string_view dob, Mysql& mysql);
 
+    // getters
+    int getpid() const {    return p_pid;   }
+
 };
 
 #endif // !PLAYER_H

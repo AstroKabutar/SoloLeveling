@@ -1,2 +1,2 @@
-alert("Debug player load game working");
+alert("Player exists");
 window.location.href = "/LoadGame";

@@ -1,6 +1,7 @@
 #include <string_view>
 #include <iostream>
 #include <sstream>
+#include <vector>
 #include <crow.h>
 #include <Mysql.h>
 #include <Player.h>
@@ -24,6 +25,11 @@ int main()
     os << crow_port_env;
     std::uint16_t crow_port_env_int {};
     os >> crow_port_env_int;
+    os.clear();
+    os.str("");
+
+    // session storage
+    ClassAllocator<PlayerGrowth>* sessions = static_cast<ClassAllocator<PlayerGrowth>*>(calloc(1000, sizeof(ClassAllocator<PlayerGrowth>)));
 
 /*---------------------------------------GET REQESTS----------------------------------------------*/
 
@@ -46,7 +52,7 @@ int main()
     // Handle POST reqest at /LoadGame
     app.route_dynamic("/LoadGame")
     .methods("POST"_method)
-    ([&mysql](const crow::request& req)
+    ([&mysql, &os, &sessions](const crow::request& req)
     {
         // Retrieve the raw body data (form data)
         std::string body = req.body;
@@ -75,6 +81,7 @@ int main()
                 if (key == "Name") 
                 {
                     pname = value;
+                    pname = Auxiliary::replace_all(pname, '+', ' ');
                 } else if (key == "PID") 
                 {
                     pid = value;
@@ -82,12 +89,34 @@ int main()
             }
         }
 
+        os << pid;
+        int id{};
+        os >> id;
+        os.clear();
+        os.str("");
+        if (id < 100 && id >= 0)
+        {
+            new (&sessions[id]) ClassAllocator<PlayerGrowth>{pname, id, mysql};
+            if(sessions[id].Get()->PExists())
+            {
+                return R"(
+                    <html>
+                        <head>
+                            <script src="/static/LoadGame.js"></script>
+                        <head>
+                    <html>
+                )";
+            }   
+        }
+
         return R"(
             <html>
                 <head>
-                    <script src="/static/LoadGame.js"></script>
+                    <script>
+                    alert("No player found");
+                    window.location.href = "/";
+                    </script>
                 </head>
-                <body></body>
             </html>
         )";
     });
@@ -95,7 +124,7 @@ int main()
     // Handle POST request at /
     app.route_dynamic("/")
     .methods("POST"_method)
-    ([&mysql](const crow::request& req)
+    ([&mysql, &os](const crow::request& req)
     {
         // Retrieve the raw body data (form data)
         std::string body = req.body;
@@ -134,52 +163,39 @@ int main()
 
         // create player object to put in DB
         Player player(name, dob, mysql);
+        int playerid{player.getpid()};
+        std::string pid{};
+        os << playerid;
+        os >> pid;
+        os.clear();
+        os.str("");
 
-        return R"(
+        std::string new_player = R"(
             <html>
                 <head>
-                    <script src="/static/index.js"></script>
+                    <script>
+                        alert("Welcome Player, Your ID is )" + pid + R"(."); 
+                        window.location.href = "/LoadGame";
+                    </script>
                 </head>
-                <body></body>
             </html>
-        )";
+            )";
+
+        return crow::response(new_player);
     });
 
     // Run the server on port xxxxx
     app.port(crow_port_env_int).multithreaded().run();
+
+    // cleaning up
+    std::cout << "Freeing\n";
+    for(int x{}; x <100; ++x)
+    {
+        if(&sessions != nullptr)
+            sessions[x].~ClassAllocator();
+    }
+    free(sessions);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

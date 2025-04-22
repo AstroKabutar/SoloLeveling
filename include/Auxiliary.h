@@ -1,8 +1,11 @@
 #ifndef AUXILIARY_H
 #define AUXILIARY_H
 #include <sstream>
+#include <stdlib.h>
 
 enum class Util;
+class PlayerGrowth;
+class Mysql;
 
 // static class
 class Auxiliary
@@ -63,5 +66,42 @@ U Auxiliary::convert(T source, const Util& u)
     return target;
 }
 
- 
+// Class allocation management templates <only for PlayerGrowth class for now>
+
+/* ---notes---
+
+pointer = new (rawMemory) T{};
+Explanation of Placement new:
+
+    Placement new allows you to construct an object at a specific memory location (in this case, rawMemory), rather than having the memory allocated and managed by new.
+
+    This allows you to control where the object is created, which is useful when you’ve already allocated memory (e.g., with calloc or malloc) and want to construct an object in that memory.
+    
+    rawMemory is a pointer to a memory block that you've already allocated using calloc or another allocation function.
+
+The placement new syntax is: new (location) Type(args). This syntax tells the compiler to construct the object of type T at the specified
+location rawMemory using the arguments passed to the constructor ({} in this case, which uses the default constructor for T).
+
+*/
+template <typename T>
+class ClassAllocator
+{
+private:
+    T* pointer{nullptr};
+
+public:
+    ClassAllocator(std::string_view pname, int pid, Mysql& mysql)
+    {
+        void* alloc = calloc(1, sizeof(T));
+        pointer = new (alloc) T{pname, pid, mysql};
+    }
+
+    ~ClassAllocator()
+    {
+        free(pointer);
+    }
+
+    T* Get() const {    return pointer;     }
+};
+
 #endif // !AUXILIARY_H

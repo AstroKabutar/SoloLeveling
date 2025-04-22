@@ -36,15 +36,15 @@ html, body {
     width: 95%;
     height: 15%;
     background: linear-gradient(to right bottom,
-    rgba(6, 218, 233, 0.5),
-    rgba(167, 4, 231, 0.959)
+    rgba(216, 177, 5, 0.205),
+    rgba(0, 0, 0, 0.616)
     );
 
     backdrop-filter: blur(2px);
 
     text-align: center;
     font-size: 50px;
-    text-shadow: 2px 2px 5px;
+    text-shadow: 2px 2px 20px rgb(253, 216, 5);
     border-radius: 3rem;
 
 
@@ -78,8 +78,8 @@ html, body {
     left: 2%;
 
     background: linear-gradient(to left top,
-    rgba(6, 218, 233, 0.5),
-    rgba(167, 4, 231, 0.959)
+    rgba(216, 177, 5, 0.205),
+    rgba(0, 0, 0, 0.616)
     );
 
     backdrop-filter: blur(6px);
@@ -114,7 +114,7 @@ html, body {
     color: black;
     text-align: center;
     font-weight: 500;
-    text-shadow: 1px 1px 20px;
+    text-shadow: 1px 1px 20px rgb(255, 188, 5);;
 
     z-index: 1;
 }
@@ -124,7 +124,7 @@ html, body {
     position: relative;
     top: -300%;
     left: 30%;
-    border: 1px solid black;
+    border: 1px solid rgb(255, 230, 2);
     text-align: center;
     min-width: 150px;
     border-radius: 2rem;
@@ -151,7 +151,7 @@ html, body {
 
 a:hover
 {
-    color: aquamarine;
+    color: rgb(14, 229, 236);
     font-size: 50px;
     text-shadow: 1px 1px 20px;
     font-weight: 700;
@@ -160,6 +160,6 @@ a:hover
 a {
     color: #000000; /* orange */
     text-decoration: none; /* optional: removes underline */
-    text-shadow: 1px 1px 20px;
+    text-shadow: 1px 1px 20px rgb(75, 253, 5);;
     font-weight: 700;
   }
