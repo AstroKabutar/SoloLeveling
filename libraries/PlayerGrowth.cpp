@@ -39,7 +39,7 @@ void PlayerGrowth::task(std::string_view task, std::string_view importance)
     pg_mysql.querry(querry);
 }
 
-void PlayerGrowth::gettasklist()
+void PlayerGrowth::gettasklist(TaskList& tasks)
 {
     std::string sql_querry{};
     sql::SQLString querry{};
@@ -47,7 +47,7 @@ void PlayerGrowth::gettasklist()
 
     sql_querry = "select task_id as ID, tasks as Tasks, importance as Class, status from tasks where player_id like " + pid;
     querry = sql_querry;
-    pg_mysql.fetch(querry, Fetch::LIST);
+    pg_mysql.fetch(querry, Fetch::LIST, tasks);
 }
 
 void PlayerGrowth::completetask(int taskid)

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasks</title>
+    <link rel="stylesheet" href="/static/tasks.css">
+</head>
+<body>
+    <section class="section_tasks_lists">
+        <section>
+            <div>
+                <table id="taskTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Task</th>
+                            <th>Importance</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Task rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+            <script src="/static/tasks_getTasks.js"></script>
+        </section>
+
+        <section class="set_task_table">
+            <section>
+                <div>
+                    <table id="setTask">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Importance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" id="taskInput" placeholder="Enter task" class="in">
+                                </td>
+                                <td>
+                                    <select id="importanceSelect" class="in">
+                                        <option value="S">S</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="E">E</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button id="submitButton">Submit</button>
+                </div>
+            </section>
+        </section>
+    </section>
+</body>
+</html>

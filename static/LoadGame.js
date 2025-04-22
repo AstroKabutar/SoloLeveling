@@ -1,2 +1,2 @@
 alert("Player exists");
-window.location.href = "/LoadGame";
+window.location.href = "/Tasks";

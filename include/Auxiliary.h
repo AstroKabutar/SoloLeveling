@@ -28,6 +28,15 @@ public:
     static U convert(T source, const Util& u);
 };
 
+struct TaskList
+{
+    std::vector<int> id{};
+    std::vector<std::string> tasks{};
+    std::vector<std::string> imp{};
+    std::vector<std::string> status{};
+};
+
+
 enum class Util
 {
     tostring,

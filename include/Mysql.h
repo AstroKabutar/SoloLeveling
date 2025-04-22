@@ -12,6 +12,7 @@
 
 enum class Fetch;
 enum class Data;
+struct TaskList;
 
 class Mysql
 {
@@ -38,6 +39,7 @@ private:
     sql::SQLString schema{"Global"};
     bool OPT_RECONNECT{};
     */
+
 public:
     Mysql();
 
@@ -45,7 +47,7 @@ public:
     void querry(const sql::SQLString& statement);
 
     // for using select statements
-    void fetch(const sql::SQLString& statement, const Fetch& f);
+    void fetch(const sql::SQLString& statement, const Fetch& f, TaskList& tasks);
 
     // for checking of a piece of data exists in db
     bool exists(const sql::SQLString& statement);
@@ -113,6 +115,7 @@ enum class Fetch
     ID,
     LIST
 };
+
 
 #endif // !MYSQL_H
 

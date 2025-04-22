@@ -5,6 +5,7 @@
 #include <cppconn/sqlstring.h>
 
 class Mysql;
+struct TaskList;
 
 class PlayerGrowth
 {
@@ -25,10 +26,13 @@ public:
     void task(std::string_view task, std::string_view importance);
 
     // get entire player tasks
-    void gettasklist();
+    void gettasklist(TaskList& tasks);
 
     // complete task
     void completetask(int tid);
+
+    // get player id
+    int getplayerid() const {   return pg_pid;  }
 
 private:
     // calculate xp

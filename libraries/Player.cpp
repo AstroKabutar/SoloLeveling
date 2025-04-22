@@ -35,7 +35,8 @@ Player::Player(std::string_view pname, std::string_view dob, Mysql& mysql)
     querry = sql_querry;
 
     std::cout << "Please keep this unique ID with you\n";
-    mysql.fetch(querry, Fetch::ID);
+    TaskList tasks{};   //just temporarily, find a way to remove it later during cleanup
+    mysql.fetch(querry, Fetch::ID, tasks);
     p_pid = mysql.getpid(querry);
 
     std::cout << "Initiating player database population\n";

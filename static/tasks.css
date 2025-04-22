@@ -1,0 +1,129 @@
+/* General Table Styles */
+#taskTable {
+    width: 100%;
+    border-collapse: collapse; /* Make the borders collapse into each other */
+}
+
+#taskTable th, #taskTable td {
+    padding: 12px; /* Adds space inside each cell */
+    text-align: left; /* Aligns the text to the left */
+    border: 1px solid #000000; /* Light border for the table */
+}
+
+#taskTable th {
+    background-color: #709960; /* Light grey background for headers */
+}
+
+#taskTable th, #taskTable td {
+    min-width: 150px; /* Ensure columns have a minimum width */
+}
+
+/* Specific Widths for Each Column */
+#taskTable th:nth-child(1), #taskTable td:nth-child(1) {
+    width: 15%; /* ID column width */
+}
+
+#taskTable th:nth-child(2), #taskTable td:nth-child(2) {
+    width: 35%; /* Task column width */
+}
+
+#taskTable th:nth-child(3), #taskTable td:nth-child(3) {
+    width: 20%; /* Importance column width */
+}
+
+#taskTable th:nth-child(4), #taskTable td:nth-child(4) {
+    width: 30%; /* Status column width */
+}
+
+/* Make the table body scrollable */
+#taskTable tbody {
+    display: block;
+    max-height: 200px;  /* Set the max height for the table body (approximately 5 rows) */
+    overflow-y: auto;   /* Enable vertical scrolling */
+    width: 100%;        /* Ensure the table body width matches the table */
+}
+
+/* Make sure the header stays fixed */
+#taskTable thead {
+    display: table;   /* Ensure the header behaves like a table element */
+    width: 100%;      /* Ensure the header width matches the table width */
+}
+
+#taskTable th, #taskTable td {
+    width: auto;  /* Allow table cells to stretch to fit content */
+}
+
+/* Ensure the header and body align properly */
+#taskTable tbody tr {
+    display: table;   /* Ensure rows inside tbody are displayed as table rows */
+    width: 100%;      /* Make sure rows are 100% of the table's width */
+    table-layout: fixed;  /* Ensure columns align correctly */
+}
+
+/* General Table Styles */
+#setTask {
+    width: 100%;
+    border-collapse: collapse; /* Make the borders collapse into each other */
+}
+
+#setTask th, #setTask td {
+    padding: 12px; /* Adds space inside each cell */
+    text-align: left; /* Aligns the text to the left */
+    border: 1px solid #000000; /* Light border for the table */
+}
+
+#setTask th {
+    background-color: #709960; /* Light grey background for headers */
+}
+
+#setTask th, #setTask td {
+    min-width: 150px; /* Ensure columns have a minimum width */
+}
+
+/* Specific Widths for Each Column */
+#setTask th:nth-child(1), #setTask td:nth-child(1) {
+    width: 60%; /* Task column width */
+}
+
+#setTask th:nth-child(2), #setTask td:nth-child(2) {
+    width: 40%; /* Status column width */
+}
+
+/* Make the table body scrollable */
+#setTask tbody {
+    display: block;
+    max-height: 200px;  /* Set the max height for the table body (approximately 5 rows) */
+    overflow-y: auto;   /* Enable vertical scrolling */
+    width: 100%;        /* Ensure the table body width matches the table */
+}
+
+/* Make sure the header stays fixed */
+#setTask thead {
+    display: table;   /* Ensure the header behaves like a table element */
+    width: 100%;      /* Ensure the header width matches the table width */
+}
+
+#setTask th, #setTask td {
+    width: auto;  /* Allow table cells to stretch to fit content */
+}
+
+/* Ensure the header and body align properly */
+#setTask tbody tr {
+    display: table;   /* Ensure rows inside tbody are displayed as table rows */
+    width: 100%;      /* Make sure rows are 100% of the table's width */
+    table-layout: fixed;  /* Ensure columns align correctly */
+}
+
+
+.section_tasks_lists
+{
+    position: absolute;
+    top: auto;
+    left: auto;
+}
+
+.in
+{
+    width: 80%;
+    font-weight: 600;
+}

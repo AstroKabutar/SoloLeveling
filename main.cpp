@@ -36,18 +36,102 @@ int main()
     // Serve the HTML form dynamically at "/"
     CROW_ROUTE(app, "/LoadGame")([]()
     {
-        auto page = crow::mustache::load_text("LoadGame.html");
-        return page;
+        return crow::mustache::load_text("LoadGame.html");
     });
 
     CROW_ROUTE(app, "/")([]()
     {
-        auto page = crow::mustache::load_text("index.html");
-        return page;
+        return crow::mustache::load_text("index.html");
     });
+
+    CROW_ROUTE(app, "/Tasks")([]()
+    {
+        return crow::mustache::load_text("tasks.html");
+    });
+
+/*--------------------------TESTING GROUNDS--------------------------------------------------------*/
+
+    CROW_ROUTE(app, "/api/gettasks")
+    ([&sessions] {
+        crow::json::wvalue json;
+        TaskList tasksl{};
+
+        // for testing now
+        sessions[1].Get()->gettasklist(tasksl);
+
+        std::vector<int> id{};
+        std::vector<std::string> tasks{};
+        std::vector<std::string> imp{};
+        std::vector<std::string> status{};
+
+        // populating the above containers
+        for(int x{}; x < tasksl.id.size(); ++x)
+        {
+            id.push_back(tasksl.id[x]);
+            tasks.push_back(tasksl.tasks[x]);
+            imp.push_back(tasksl.imp[x]);
+            status.push_back(tasksl.status[x]);
+        }
+
+        std::vector<crow::json::wvalue> task_list{};
+
+        for(int i{}; i < id.size(); ++i)
+        {
+            crow::json::wvalue temp;
+            // if error pops then will convert id to string
+            temp["ID"] = id[i];
+            temp["Tasks"] = tasks[i];
+            temp["Importance"] = imp[i];
+            temp["Status"] = status[i];
+            task_list.push_back(temp);
+        }
+
+        json["tasks_list"] = std::move(task_list);
+
+        return crow::response(json);
+    });
+
+    /*crow::json::wvalue json;
+
+    std::vector<std::string> id = {"1", "2", "3"};
+    std::vector<std::string> tasks = {"Task 1", "Task 2", "Task 3"};
+    std::vector<std::string> imp = {"High", "Medium", "Low"};
+    std::vector<std::string> status = {"Pending", "Completed", "Pending"};
+    
+    // Vector to hold the JSON objects
+    std::vector<crow::json::wvalue> items;
+    
+    for (size_t i = 0; i < id.size(); ++i) {
+        crow::json::wvalue task;
+        task["id"] = id[i];
+        task["task"] = tasks[i];
+        task["importance"] = imp[i];
+        task["status"] = status[i];
+        items.push_back(task);
+    }
+    
+    // Assign vector to JSON array field
+    json["items"] = std::move(items);
+    
+    return crow::response(json);*/
+    
+    
+
+
+/*---------------------------------------------------------------------------------------------*/
+
+
+
 
 /*---------------------------------------POST REQESTS----------------------------------------------*/
 
+    // Handle POST request at /Tasks route for task related things
+   /* app.route_dynamic("/Tasks")
+    .methods("POST"_method)
+    ([&mysql, &os, &sessions]
+    {
+
+    });*/
 
     // Handle POST reqest at /LoadGame
     app.route_dynamic("/LoadGame")
@@ -196,7 +280,6 @@ int main()
     }
     free(sessions);
 }
-
 
 
 /*

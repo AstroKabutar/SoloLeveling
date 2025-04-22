@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <Auxiliary.h>
 
 std::string Auxiliary::replace_all(std::string_view str, char mark, char replace)

@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include <Mysql.h>
+#include <Auxiliary.h>
 
 Mysql::Mysql()
 {
@@ -91,7 +92,7 @@ void Mysql::querry(const sql::SQLString& statement)
     //std::cout << "Querry Successfully ran\n";
 }
 
-void Mysql::fetch(const sql::SQLString& statement, const Fetch& f)
+void Mysql::fetch(const sql::SQLString& statement, const Fetch& f, TaskList& tasks)
 {
     switch (f)
     {
@@ -104,13 +105,22 @@ void Mysql::fetch(const sql::SQLString& statement, const Fetch& f)
         break;
 
         case Fetch::LIST:
-            res = stmt->executeQuery(statement);
+            /*res = stmt->executeQuery(statement);
             while(res->next())
             {
                 std::cout << res->getInt(1) << " ";
                 std::cout << res->getString(2) << " ";
                 std::cout << res->getString(3) << " ";
                 std::cout << res->getString(4) << '\n';
+            }*/
+
+            res = stmt->executeQuery(statement);
+            while(res->next())
+            {
+                tasks.id.push_back(res->getInt(1));
+                tasks.tasks.push_back(res->getString(2));
+                tasks.imp.push_back(res->getString(3));
+                tasks.status.push_back(res->getString(4));
             }
         break;
     }
