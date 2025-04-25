@@ -29,7 +29,8 @@ int main()
     os.str("");
 
     // session storage
-    ClassAllocator<PlayerGrowth>* sessions = static_cast<ClassAllocator<PlayerGrowth>*>(calloc(1000, sizeof(ClassAllocator<PlayerGrowth>)));
+    ClassAllocator<PlayerGrowth>* session = static_cast<ClassAllocator<PlayerGrowth>*>(calloc(1, sizeof(ClassAllocator<PlayerGrowth>)));
+    //ClassAllocator<PlayerGrowth>* session = static_cast<ClassAllocator<PlayerGrowth>*>(malloc(1 * sizeof(ClassAllocator<PlayerGrowth>)));
 
 /*---------------------------------------GET REQESTS----------------------------------------------*/
 
@@ -44,25 +45,27 @@ int main()
         return crow::mustache::load_text("index.html");
     });
 
-    CROW_ROUTE(app, "/Tasks")([]()
+    /*CROW_ROUTE(app, "/Tasks")([]()
     {
         return crow::mustache::load_text("tasks.html");
-    });
+    });*/
 
 /*--------------------------TESTING GROUNDS--------------------------------------------------------*/
 
     CROW_ROUTE(app, "/api/gettasks")
-    ([&sessions] {
+    ([&session] {
         crow::json::wvalue json;
         TaskList tasksl{};
 
         // for testing now
-        sessions[1].Get()->gettasklist(tasksl);
+        session->Get()->gettasklist(tasksl);
 
         std::vector<int> id{};
         std::vector<std::string> tasks{};
         std::vector<std::string> imp{};
         std::vector<std::string> status{};
+
+        std::vector<crow::json::wvalue> task_list{};
 
         // populating the above containers
         for(int x{}; x < tasksl.id.size(); ++x)
@@ -72,8 +75,6 @@ int main()
             imp.push_back(tasksl.imp[x]);
             status.push_back(tasksl.status[x]);
         }
-
-        std::vector<crow::json::wvalue> task_list{};
 
         for(int i{}; i < id.size(); ++i)
         {
@@ -87,6 +88,35 @@ int main()
         }
 
         json["tasks_list"] = std::move(task_list);
+
+        return crow::response(json);
+    });
+
+    // ------------------- get player stats ------------------ //
+    CROW_ROUTE(app, "/api/playerstats")
+    ([&session] {
+        crow::json::wvalue json;
+        //TaskList tasksl{};
+
+        // for testing now
+        //session->Get()->gettasklist(tasksl);
+
+        std::vector<std::string> pname{"Chappal"};
+        std::vector<double> current_xp{32};
+        std::vector<double> current_level{4};
+        std::vector<double> required_xp{234};
+
+        std::vector<crow::json::wvalue> Player_Stats{};
+
+        crow::json::wvalue temp;
+        // if error pops then will convert id to string
+        temp["pname"] = pname;
+        temp["current_xp"] = current_xp;
+        temp["current_level"] = current_level;
+        temp["required_xp"] = required_xp;
+        Player_Stats.push_back(temp);
+
+        json["Player_Stats"] = std::move(Player_Stats);
 
         return crow::response(json);
     });
@@ -136,7 +166,7 @@ int main()
     // Handle POST reqest at /LoadGame
     app.route_dynamic("/LoadGame")
     .methods("POST"_method)
-    ([&mysql, &os, &sessions](const crow::request& req)
+    ([&mysql, &os, &session](const crow::request& req)
     {
         // Retrieve the raw body data (form data)
         std::string body = req.body;
@@ -150,12 +180,17 @@ int main()
         std::string pid{};
         std::stringstream os{};
 
+        // get other data
+        std::string importance{};
+        std::string new_task{};
+        int task_id{};
+
         // Split body by '&' to get key-value pairs
         std::istringstream stream(body);
         std::string pair;
         while (std::getline(stream, pair, '&')) 
         {
-            //std::cout << "\n-------------- " << pair <<" ----------\n";
+            std::cout << "\n-------------- " << pair <<" ----------\n";
             size_t pos = pair.find("=");
             if (pos != std::string::npos) 
             {
@@ -170,9 +205,26 @@ int main()
                 {
                     pid = value;
                 }
+                else if (key == "taskInput") 
+                {
+                    new_task = value;
+                    new_task = Auxiliary::replace_all(new_task, '+', ' ');
+                } 
+                else if (key == "Importance") 
+                {
+                    importance = value;
+                }
+                else if(key == "task_id")
+                {
+                    os << value;
+                    os >> task_id;
+                    os.clear();
+                    os.str("");
+                }
             }
         }
 
+        // check for player existence then proceed
         os << pid;
         int id{};
         os >> id;
@@ -180,29 +232,48 @@ int main()
         os.str("");
         if (id < 100 && id >= 0)
         {
-            new (&sessions[id]) ClassAllocator<PlayerGrowth>{pname, id, mysql};
-            if(sessions[id].Get()->PExists())
+            new (session) ClassAllocator<PlayerGrowth>{pname, id, mysql};
+
+            std::cout << "Session variable error\n";
+            if((!(session->Get()->PExists())))
             {
-                return R"(
+                std::string error = R"(
                     <html>
                         <head>
-                            <script src="/static/LoadGame.js"></script>
-                        <head>
-                    <html>
+                            <script>
+                            alert("No player found");
+                            window.location.href = "/";
+                            </script>
+                        </head>
+                    </html>
                 )";
+
+                return crow::response(error);
             }   
         }
+        
+        // check if new task is entered then insert into database
+        // check if completed then proceed to complete the task
+        if(!new_task.empty())
+        {
+            session->Get()->task(new_task, importance);
+        }
+        if(task_id>0)
+        {
+            session->Get()->completetask(task_id);
+        }
 
-        return R"(
+        // reload with updated stats
+        std::string redirect = R"(
             <html>
                 <head>
                     <script>
-                    alert("No player found");
-                    window.location.href = "/";
+                        window.location.href = "/LoadGame?init=1";
                     </script>
                 </head>
             </html>
-        )";
+            )";
+        return crow::response(redirect);
     });
 
     // Handle POST request at /
@@ -214,7 +285,7 @@ int main()
         std::string body = req.body;
 
         // Print the raw body data (for debugging purposes)
-        std::cout << "Raw body data: " << body << std::endl;
+        std::cout << "Raw body data: " << body << '\n';
 
         // Now, parse the body (assuming URL-encoded data: name=John&email=john@example.com)
         // We can manually parse the body as key-value pairs: given in id in html
@@ -272,13 +343,15 @@ int main()
     app.port(crow_port_env_int).multithreaded().run();
 
     // cleaning up
-    std::cout << "Freeing\n";
+    /*std::cout << "Freeing\n";
     for(int x{}; x <100; ++x)
     {
         if(&sessions != nullptr)
             sessions[x].~ClassAllocator();
     }
-    free(sessions);
+    free(sessions);*/
+
+    delete session;
 }
 
 

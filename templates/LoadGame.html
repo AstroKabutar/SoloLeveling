@@ -8,19 +8,75 @@
 </head>
 <body class="background">
 
-<section>
   <form action="http://192.168.0.20:8000/LoadGame" method="POST">
-    <div class="heading"> Load Game
-      <br><br><br><br>
-    <div class="form_body">Name: 
-      <input type="text" class="in" name="Name">
-    </div><br>
-    <div class="form_body">UID: 
-      <input type="text" class="in" name="PID"> <br> <br>
-      <button type="submit" class="button">Submit</button></div>
+  <section class="section_tasks_lists" style="z-index: 1;">
+      <section>
+          <div>
+              <table id="taskTable" class="heading1">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Task</th>
+                          <th>Importance</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <!-- Task rows will be inserted here -->
+                  </tbody>
+              </table>
+          </div>
+          <script src="/static/tasks_getTasks.js"></script>
+      </section>
 
+      <section class="set_task_table">
+          <section>
+              <div>
+                  <table id="setTask" class="heading1">
+                      <thead>
+                          <tr>
+                              <th>New Task</th>
+                              <th>Importance</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td>
+                                  <input type="text" id="taskInput" name="taskInput" placeholder="Enter task" class="in">
+                              </td>
+                              <td>
+                                  <select id="importanceSelect" name="Importance" class="tin">
+                                      <option value="S">S</option>
+                                      <option value="A">A</option>
+                                      <option value="B">B</option>
+                                      <option value="C">C</option>
+                                      <option value="D">D</option>
+                                      <option value="E">E</option>
+                                  </select>
+                              </td>
+                          </tr>
+                      </tbody>
+                      <div class="Stats">
+                        <h1 id="Player_Stats"><script src="/static/tasks_getTasks.js"></script></h1>
+                      </div>
+                  </table>
+              </div>
+          </section>
+      </section>
+      <section>
+        <h1 class="heading" style="text-align:center;">Enter Task id to mark as complete
+        <input type="text" class="cin" name="task_id"></h1><br>
+        <h1 class="heading"><br>
+        Player Name:
+        <input type="text" class="Pin" name="Name" style="min-height: 120; font-size: small"><br> <br>
+        ID:
+        <input type="text" class="Pin" name="PID" style="min-height: 120;font-size: small">
+        <button type="submit" class="sbutton">Submit</button></h1>
+      </section>
 </section>
+</form>
 </body>
 </html>
 
-
+<h1>Hello, {{username}}!</h1>
+std::string html = load_html_and_replace("templates/welcome.html", "{{username}}", username);
