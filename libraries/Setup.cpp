@@ -7,7 +7,7 @@ Setup::Setup(Mysql& mysql)
     mysql.querry(firstrun::database);
 
     // switch database
-    mysql.querry(firstrun::switchdb);
+    //mysql.querry(firstrun::switchdb);
 
     // create base tables in the database
     mysql.querry(firstrun::players);

@@ -18,9 +18,6 @@ PlayerGrowth::PlayerGrowth(std::string_view pname, int pid, Mysql& mysql)
 
     std::cout << sql_querry << "\n";
     pg_ispresent = mysql.exists(querry);
-
-    if(!pg_ispresent)
-        std::cout << "Player doesnot exist\n";
 }
 
 void PlayerGrowth::task(std::string_view task, std::string_view importance)
@@ -112,6 +109,32 @@ where player_id like 2;
 */
 void PlayerGrowth::updatexp(std::string tid)
 {
+    // get data to display on the page
+    if(tid == "getdata")
+    {
+        std::string sql_querry{};
+        sql::SQLString querry{};
+        std::string pid{Auxiliary::convert<int, std::string>(pg_pid, Util::tostring)};
+        double xp_gained{};
+    
+        //sql_querry = "select tasks.task_id, tasks.tasks, importance.xp_gain as reward, xp_transactions.xp_gained as currentxp from players inner join tasks on tasks.player_id = players.player_id inner join importance on tasks.importance = importance.class inner join xp_transactions on xp_transactions.player_id = players.player_id where tasks.task_id like " + tid;
+        sql_querry = "select player_progression.current_xp as currentxp from players inner join player_progression on player_progression.player_id = players.player_id where players.player_id like " + pid;
+        querry = sql_querry;
+    
+        // get currentxp from database
+        pg_current_xp = pg_mysql.getdata<double>(querry, Data::currentxp);
+    
+
+        sql_querry = "select player_progression.current_level as level from player_progression inner join players on players.player_id = player_progression.player_id where players.player_id like " + pid;
+        querry = sql_querry;
+        pg_level = pg_mysql.getdata<int>(querry, Data::level);
+    
+        sql_querry = "select levels.xp_required from levels inner join players on players.player_id = levels.player_id where players.player_id like " + pid;
+        querry = sql_querry;
+        pg_requiredxp = pg_mysql.getdata<double>(querry, Data::xp_required);
+        return;
+    }
+
     std::string sql_querry{};
     sql::SQLString querry{};
     std::string pid{Auxiliary::convert<int, std::string>(pg_pid, Util::tostring)};
@@ -131,15 +154,18 @@ void PlayerGrowth::updatexp(std::string tid)
 
     // new rewarded xp
     currentxp += xp_gained;
+    pg_current_xp = currentxp;
 
     // check to see if player leveled
     sql_querry = "select player_progression.current_level as level from player_progression inner join tasks on tasks.player_id = player_progression.player_id where tasks.task_id like " + tid;
     querry = sql_querry;
     int level{pg_mysql.getdata<int>(querry, Data::level)};
+    pg_level = level;
 
     sql_querry = "select levels.xp_required from levels inner join tasks on tasks.player_id = levels.player_id where tasks.task_id like " + tid;
     querry = sql_querry;
     double xp_required{pg_mysql.getdata<double>(querry, Data::xp_required)};
+    pg_requiredxp = xp_required;
     
 
     std::cout << "Current xp - " << currentxp << " XP_Required - " << xp_required << " Current level " << level << '\n';
@@ -149,9 +175,14 @@ void PlayerGrowth::updatexp(std::string tid)
         std::cout << "Leveled up!!!\n";
         ++level;
 
+        pg_level = level;
+
         // new threshold
         xp_required += (30 * xp_required) / 100 + 8;
         currentxp = 1;
+
+        pg_requiredxp = xp_required;
+        pg_current_xp = currentxp;
 
         // update the new level and xp in database
         sql_querry = "update levels inner join tasks on tasks.player_id = levels.player_id set level = '?', xp_required = '?' where tasks.task_id like " + tid;

@@ -23,10 +23,18 @@ int main()
     const char* crow_port_env{std::getenv("HTTP_PORT")};
     std::stringstream os{};
     os << crow_port_env;
-    std::uint16_t crow_port_env_int {};
+    std::uint16_t crow_port_env_int{};
     os >> crow_port_env_int;
     os.clear();
     os.str("");
+
+    const char* thread_count{std::getenv("THREADS")};
+    os << thread_count;
+    std::uint16_t threads{};
+    os >> threads;
+    os.clear();
+    os.str("");
+
 
     // session storage
     ClassAllocator<PlayerGrowth>* session = static_cast<ClassAllocator<PlayerGrowth>*>(calloc(1, sizeof(ClassAllocator<PlayerGrowth>)));
@@ -96,20 +104,18 @@ int main()
     CROW_ROUTE(app, "/api/playerstats")
     ([&session] {
         crow::json::wvalue json;
-        //TaskList tasksl{};
 
         // for testing now
-        //session->Get()->gettasklist(tasksl);
+        session->Get()->updatexp("getdata");        
 
-        std::vector<std::string> pname{"Chappal"};
-        std::vector<double> current_xp{32};
-        std::vector<double> current_level{4};
-        std::vector<double> required_xp{234};
+        std::string pname{session->Get()->pg_name};
+        double current_xp{session->Get()->pg_current_xp};
+        int current_level{session->Get()->pg_level};
+        double required_xp{session->Get()->pg_requiredxp};
 
         std::vector<crow::json::wvalue> Player_Stats{};
 
         crow::json::wvalue temp;
-        // if error pops then will convert id to string
         temp["pname"] = pname;
         temp["current_xp"] = current_xp;
         temp["current_level"] = current_level;
@@ -340,16 +346,9 @@ int main()
     });
 
     // Run the server on port xxxxx
-    app.port(crow_port_env_int).multithreaded().run();
-
-    // cleaning up
-    /*std::cout << "Freeing\n";
-    for(int x{}; x <100; ++x)
-    {
-        if(&sessions != nullptr)
-            sessions[x].~ClassAllocator();
-    }
-    free(sessions);*/
+    //app.port(crow_port_env_int).multithreaded().run();
+    app.port(crow_port_env_int).concurrency(threads).run();
+    
 
     delete session;
 }

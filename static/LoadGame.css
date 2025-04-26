@@ -12,6 +12,27 @@
     background-position: center;  /* keeps image centered */
 }
 
+.video-background {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* or any desired size */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    object-fit: cover; /* Makes it behave like background-size: cover */
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -31,6 +52,11 @@ html, body {
     text-shadow: 2px 2px 15px;
     border-radius: 3rem;
 
+    background: linear-gradient(to left top,
+    rgba(19, 22, 224, 0.493),
+    rgba(0, 0, 0, 0.788)
+    );
+    
     z-index: 1;
 }
 
@@ -153,9 +179,9 @@ a {
 
     width: 95%;
     height: 400px;
-    background: linear-gradient(to right bottom,
-    rgba(173, 17, 179, 0.788),
-    rgba(9, 215, 230, 0.384)
+    background: linear-gradient(to left bottom,
+    rgba(19, 22, 224, 0.493),
+    rgba(0, 0, 0, 0.788)
     );
 
     backdrop-filter: blur(2px);
@@ -180,8 +206,8 @@ a {
     width: 95%;
     height: 400px;
     background: linear-gradient(to left bottom,
-    rgba(9, 215, 230, 0.664),
-    rgba(173, 17, 179, 0.788)
+    rgba(19, 22, 224, 0.664),
+    rgba(0, 0, 0, 0.788)
     );
 
     backdrop-filter: blur(2px);

@@ -10,13 +10,17 @@ struct TaskList;
 class PlayerGrowth
 {
 private:
-
     const int pg_pid{};
-    const std::string pg_name{};
     bool pg_ispresent{};
     Mysql pg_mysql{};
 
 public:
+
+    const std::string pg_name{};
+    double pg_current_xp{};
+    int pg_level{};
+    double pg_requiredxp{};
+
     PlayerGrowth(std::string_view pname, int pid, Mysql& mysql);
 
     // return 
@@ -34,10 +38,9 @@ public:
     // get player id
     int getplayerid() const {   return pg_pid;  }
 
-private:
+//private:
     // calculate xp
     void updatexp(std::string tid);
 };
-
 
 #endif // PLAYERGROWTH_H

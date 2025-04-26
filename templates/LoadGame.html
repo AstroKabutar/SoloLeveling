@@ -7,6 +7,11 @@
   <title>Load Game</title>
 </head>
 <body class="background">
+    <div class="video-background">
+        <video autoplay muted loop playsinline class="gif-like-video">
+          <source src="/static/video/LoadGame.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
 
   <form action="http://192.168.0.20:8000/LoadGame" method="POST">
   <section class="section_tasks_lists" style="z-index: 1;">
@@ -77,6 +82,3 @@
 </form>
 </body>
 </html>
-
-<h1>Hello, {{username}}!</h1>
-std::string html = load_html_and_replace("templates/welcome.html", "{{username}}", username);
