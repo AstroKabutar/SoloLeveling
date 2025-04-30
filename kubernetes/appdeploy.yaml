@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portfolio
+  namespace: portfolioapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio-app
+  
+  template:
+    metadata:
+      labels:
+        app: portfolio-app
+
+    spec:
+      containers:
+      - name: crow-app
+        image: schd1337/portfolioapp:v1
+        ports:
+        - containerPort: 8000
+        envFrom:
+          - secretRef:
+              name: portfolio-env
+---
+# Environment variables
+apiVersion: v1
+kind: Secret
+metadata:
+  name: portfolio-env
+  namespace: portfolioapp
+type: Opaque
+data:
+  ################## DATABASE ########################
+  HOSTNAME: dGNwOi8vMTkyLjE2OC4wLjIwOjgwMDEvVXNlcnM=
+  USERNAME: cm9vdA==
+  SCHEMA: VXNlcnM=
+  PASSWORD: U2VjdXJl
+  PORT: ODAwMQ==
+  ############## CROWCPP #####################
+  HTTP_PORT: ODAwMA==
+  THREADS: Mg==
+  #################### HTML VAriables ####################
+  HTML_IP: MTkyLjE2OC4wLjIw
+  HTML_PORT: ODA=
+
+---
+# service for this app
+apiVersion: v1
+kind: Service
+metadata:
+  name: portfolio-expose
+  namespace: portfolioapp
+spec:
+  type: ClusterIP
+  selector:
+    app: portfolio-app
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside cluster
+    port: 8000
+    # Port to forward to inside the pod
+    targetPort: 8000
+  externalIPs:
+  - 192.168.49.2

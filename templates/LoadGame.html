@@ -8,12 +8,12 @@
 </head>
 <body class="background">
     <div class="video-background">
-        <video autoplay muted loop playsinline class="gif-like-video">
+        <video autoplay muted loop playsinline>
           <source src="/static/video/LoadGame.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
 
-  <form action="http://192.168.0.20:8000/LoadGame" method="POST">
+  <form action="http://$HTML_IP:$HTML_PORT/LoadGame" method="POST">
   <section class="section_tasks_lists" style="z-index: 1;">
       <section>
           <div>

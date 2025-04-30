@@ -10,13 +10,13 @@
 <body class="background">
 
 <div class="video-background">
-  <video autoplay loop playsinline class="gif-like-video">
+  <video autoplay loop playsinline>
     <source src="/static/video/bg.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 
 <section>
-<form action="http://192.168.0.20:8000/" method="POST">
+<form action="http://$HTML_IP:$HTML_PORT/" method="POST">
 <div class="heading">Welcome!!<br>Want to level up your game?
     <div class="glass" ></div>
     <div class="form"><a href="/LoadGame">Load Game</a></div>
@@ -34,4 +34,5 @@
 </section>
 </body>
 </html>
+
 

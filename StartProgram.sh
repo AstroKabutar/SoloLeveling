@@ -38,10 +38,12 @@ done
 
 cd ..
 
+mv ./build/SoloLeveling .
+
 # begin running the executable
 #cp build/SoloLeveling .
-source ENV/Mysql.env
-./build/SoloLeveling
+#source ENV/Mysql.env
+#./build/SoloLeveling
 #valgrind ./build/SoloLeveling
 
 # cleaning up

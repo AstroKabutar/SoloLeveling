@@ -18,7 +18,6 @@
     object-fit: cover; /* Makes it behave like background-size: cover */
 }
 
-
 html, body {
     margin: 0;
     padding: 0;
