@@ -1,39 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: portfolio-db
-  namespace: portfoliodb
+  name: solo-leveling-db
+  namespace: sololeveling
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: portfoliodb
+      project: sololeveling-db
   
   template:
     metadata:
       labels:
-        app: portfoliodb
+        project: sololeveling-db
 
     spec:
       containers:
-      - name: crow-app
+      - name: mysqldb
         image: schd1337/portfoliodb:v1
-        ports:
-        - containerPort: 3306
 ---
 # service for this db
 apiVersion: v1
 kind: Service
 metadata:
-  name: portfoliodb-expose
-  namespace: portfoliodb
+  name: solo-leveling-db-service
+  namespace: sololeveling
 spec:
   type: ClusterIP 
   selector:
-    app: portfolio-db
+    project: sololeveling-db
   ports:
   - protocol: "TCP"
     # Port accessible inside cluster
-    port: 8001
-    # Port to forward to inside the pod
-    targetPort: 3306
+    port: 3306

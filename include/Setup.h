@@ -103,6 +103,22 @@ namespace firstrun
             xp_gain double not null\
         )\
     "};
+
+    /*
+    insert into importance values('S', 10);
+    insert into importance values('A', 8);
+    insert into importance values('B', 6);
+    insert into importance values('C', 4);
+    insert into importance values('D', 2);
+    insert into importance values('E', 1);
+    */
+    // fill up the importance
+    const sql::SQLString impS{"insert into importance values('S', 10)"};
+    const sql::SQLString impA{"insert into importance values('A', 8)"};
+    const sql::SQLString impB{"insert into importance values('B', 6)"};
+    const sql::SQLString impC{"insert into importance values('C', 4)"};
+    const sql::SQLString impD{"insert into importance values('D', 2)"};
+    const sql::SQLString impE{"insert into importance values('E', 1)"};
 };
 
 #endif // !SETUP_H

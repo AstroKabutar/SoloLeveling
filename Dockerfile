@@ -6,7 +6,7 @@ RUN apt-get update &&\
 COPY . /SoloLeveling
 RUN chmod 755 -R /SoloLeveling
 WORKDIR /SoloLeveling
-EXPOSE 8000
+EXPOSE 80
 CMD ["bash", "Start.sh"]
 
-# docker build -t solo-test .
+# docker build -t schd1337/portfolioapp:v2 .

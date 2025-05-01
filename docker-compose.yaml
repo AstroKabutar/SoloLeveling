@@ -6,12 +6,12 @@ services:
       - MYSQL_ROOT_PASSWORD=Secure
       - MYSQL_DATABASE=Users
     ports:
-      - 8001:3306
+      - 8000:3306
       
   solo-test:
-    image: solo-test
+    image: schd1337/portfolioapp:v2
     container_name: solo-test
     env_file:
     - ENV/Mysql.env
     ports:
-      - 81:8000
+      - 10000:10000

@@ -1,3 +1,5 @@
+#! /bin/bash
+
 echo "Population files with env variables"
 envsubst < templates_raw/index.html > templates/index.html
 envsubst < templates_raw/LoadGame.html > templates/LoadGame.html

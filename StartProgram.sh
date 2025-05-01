@@ -38,6 +38,7 @@ done
 
 cd ..
 
+rm SoloLeveling
 mv ./build/SoloLeveling .
 
 # begin running the executable

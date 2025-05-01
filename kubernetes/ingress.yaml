@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: portfolio-ingress
-  namespace: portfolioapp   # If the Ingress is in the default namespace, it won’t find your service in portfolioapp unless fully qualified (portfolio-expose.portfolioapp.svc.cluster.local)
+  namespace: sololeveling 
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -14,13 +14,13 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: portfolio-expose
+              name: solo-leveling-service
               port:
-                number: 8000
+                number: 80
 #        - path: /
 #          pathType: Prefix
 #          backend:
 #            service:
-#              name: portfolio-expose
+#              name: my-website
 #              port:
-#                number: 8000
+#                number: 80
