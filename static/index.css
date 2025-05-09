@@ -1,0 +1,177 @@
+.ascii-wrapper 
+{
+    position: relative;
+}
+  
+
+a:hover
+{
+    color: rgba(8, 219, 18, 0.945);
+    text-shadow: 1px 1px 20px;
+    font-weight: 700;
+}
+
+a 
+{
+    text-decoration: none;
+    text-shadow: 1px 1px 20px rgb(241, 6, 6);
+    font-weight: 700;
+}
+
+body
+{
+    color: lime;
+    background-color: black;
+    font-size: xx-large;
+    overflow-x: hidden;
+}
+
+.shadow
+{
+    color: rgba(8, 219, 18, 0.945);
+    text-shadow: 1px 1px 20px;
+}
+
+.heading
+{
+    position: relative;
+    left: 40%;
+    color: rgba(8, 219, 18, 0.945);
+    text-shadow: 1px 1px 80px;
+}
+
+.art
+{
+    position: relative;
+    left: 2%;
+}
+
+.flash-wrapper 
+{
+    animation: flash 0.2s infinite;
+}
+  
+.flashing-image 
+{
+    width: 300px;
+    height: auto;
+}
+  
+@keyframes flash 
+{
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+.flash-once 
+{
+    animation: flashOnce 1.5s ease-in-out;
+}
+.flash-once-reverse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none; /* So it doesn't block interaction */
+  }
+@keyframes flashOnceReverse 
+{
+    0% 
+    {
+      opacity: 1;
+    }
+    100% 
+    {
+      opacity: 0;
+    }
+}
+
+@keyframes flashOnce 
+{
+    0% 
+    {
+      opacity: 0;
+    }
+    50% 
+    {
+      opacity: 1;
+    }
+    100% 
+    {
+      opacity: 1;
+    }
+}
+
+.circle1
+{
+
+    
+    background: linear-gradient(to top right,
+    rgba(85, 212, 12, 0.7),
+    rgba(0, 0, 0, 0.5),
+    rgba(85, 212, 12, 0.7)
+    );
+
+    backdrop-filter: blur(6px);
+
+    height: 100%;
+    width: 100%;
+
+    border-radius: 50%;
+
+    position: absolute;
+    animation: flashOnceReverse 1s ease-out forwards;
+}
+
+.circle1
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 40%;
+}
+
+
+
+@keyframes glitch {
+    0% {
+      transform: translate(0);
+      opacity: 1;
+    }
+    20% {
+      transform: translate(-2px, 1px);
+      opacity: 0.9;
+    }
+    40% {
+      transform: translate(2px, -1px);
+      opacity: 0.8;
+    }
+    60% {
+      transform: translate(-1px, 2px);
+      opacity: 0.85;
+    }
+    80% {
+      transform: translate(1px, -2px);
+      opacity: 0.95;
+    }
+    100% {
+      transform: translate(0);
+      opacity: 1;
+    }
+  }
+  
+.glitch-box 
+{
+    display: inline-block;
+    font-family: monospace;
+    color: rgb(48, 240, 9);
+    background: black;
+    padding: 5px;
+    margin: 10px;
+    /*border: 1px solid #0ff;*/
+    animation: glitch 0.3s infinite;
+    white-space: pre;
+}
+  
