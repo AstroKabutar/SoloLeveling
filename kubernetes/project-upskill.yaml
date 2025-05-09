@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: crow-app
-        image: schd1337/portfolioapp:v2
+        image: schd1337/portfolioapp:v3
         ports:
         - containerPort: 80   
         envFrom:

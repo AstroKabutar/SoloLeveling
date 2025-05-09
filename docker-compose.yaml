@@ -1,17 +1,16 @@
 services:
   db_mysql:
-    image: schd1337/portfoliodb:v1
+    image: schd1337/portfoliodb:v3
     container_name: Solo_leveling_Database
-    environment:
-      - MYSQL_ROOT_PASSWORD=Secure
-      - MYSQL_DATABASE=Users
     ports:
       - 8000:3306
+      - 5000:5000
       
   solo-test:
-    image: schd1337/portfolioapp:v2
+    image: schd1337/portfolioapp:v3
     container_name: solo-test
     env_file:
     - ENV/Mysql.env
     ports:
       - 10000:10000
+      - 6000:6000
