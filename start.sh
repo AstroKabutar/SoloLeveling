@@ -1,10 +1,8 @@
 #! /bin/bash
 
-#envsubst < templates_raw/index.html > templates/index.html
-
-
-# http://$HTML_IP:$HTML_PORT/"
-
+envsubst < htmls_raw/index.html > htmls/index.html
+rm -r htmls_raw
+ 
+python3 -m venv runner
 source runner/bin/activate
-pip install flask
 python3 mywebsite.py
