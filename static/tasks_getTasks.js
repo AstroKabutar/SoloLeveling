@@ -54,8 +54,9 @@ function loadPlayerStats()
             ${stats.required_xp} XP required\n`;
         });
 }
-
-document.getElementById("submitButton").addEventListener("click", function() {
+/*
+document.getElementById("submitButton").addEventListener("click", function() 
+{
     // Get values from the input and dropdown
     var task = document.getElementById("taskInput").value;
     var importance = document.getElementById("importanceSelect").value;
@@ -91,3 +92,4 @@ document.getElementById("submitButton").addEventListener("click", function() {
         document.getElementById("feedback").textContent = "Error submitting task!";
     });
 });
+*/

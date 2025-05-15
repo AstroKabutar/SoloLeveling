@@ -1,2 +1,2 @@
 alert("Welcome Player...");
-window.location.href = "/";
+window.location.href = "/Begin";

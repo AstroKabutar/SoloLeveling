@@ -3,24 +3,67 @@ kind: Ingress
 metadata:
   name: portfolio-ingress
   namespace: sololeveling 
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  #annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-        - path: /
+        - path: /Begin
           pathType: Prefix
           backend:
             service:
               name: solo-leveling-service
               port:
-                number: 80
-#        - path: /
-#          pathType: Prefix
-#          backend:
-#            service:
-#              name: my-website
-#              port:
-#                number: 80
+                number: 8000
+        - path: /LoadGame
+          pathType: Prefix
+          backend:
+            service:
+              name: solo-leveling-service
+              port:
+                number: 8000
+        - path: /static
+          pathType: Prefix
+          backend:
+            service:
+              name: solo-leveling-service
+              port:
+                number: 8000
+        - path: /api
+          pathType: Prefix
+          backend:
+            service:
+              name: solo-leveling-service
+              port:
+                number: 8000
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: portfolio-ingress-static
+  namespace: static 
+  #annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+        - path: /Shahin
+          pathType: Prefix
+          backend:
+            service:
+              name: mystatic-site-service
+              port:
+                number: 9000
+        - path: /statics
+          pathType: Prefix
+          backend:
+            service:
+              name: mystatic-site-service
+              port:
+                number: 9000

@@ -48,7 +48,7 @@ int main()
         return crow::mustache::load_text("LoadGame.html");
     });
 
-    CROW_ROUTE(app, "/")([]()
+    CROW_ROUTE(app, "/Begin")([]()
     {
         return crow::mustache::load_text("index.html");
     });
@@ -248,7 +248,7 @@ int main()
                         <head>
                             <script>
                             alert("No player found");
-                            window.location.href = "/";
+                            window.location.href = "/Begin";
                             </script>
                         </head>
                     </html>
@@ -282,8 +282,8 @@ int main()
         return crow::response(redirect);
     });
 
-    // Handle POST request at /
-    app.route_dynamic("/")
+    // Handle POST request at /Begin
+    app.route_dynamic("/Begin")
     .methods("POST"_method)
     ([&mysql, &os](const crow::request& req)
     {

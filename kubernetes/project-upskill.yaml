@@ -17,9 +17,9 @@ spec:
     spec:
       containers:
       - name: crow-app
-        image: schd1337/portfolioapp:v3
+        image: schd1337/portfolioapp:l2
         ports:
-        - containerPort: 80   
+        - containerPort: 80
         envFrom:
           - secretRef:
               name: solo-leveling-env
@@ -38,8 +38,8 @@ spec:
   ports:
   - protocol: "TCP"
     # Port accessible inside cluster
-    port: 80
-
+    port: 8000
+    # Port inside the container
     targetPort: 80
 
 ---

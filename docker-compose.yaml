@@ -7,10 +7,18 @@ services:
       - 5000:5000
       
   solo-test:
-    image: schd1337/portfolioapp:v3
+    image: schd1337/portfolioapp:l1
     container_name: solo-test
     env_file:
     - ENV/Mysql.env
     ports:
       - 10000:10000
       - 6000:6000
+
+  static:
+    image: schd1337/mywebsite:l1
+    container_name: static-site
+    env_file:
+    - ENV/static.env
+    ports:
+      - 9000:80

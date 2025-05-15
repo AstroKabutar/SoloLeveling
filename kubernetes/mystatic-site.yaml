@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mystatic-site
+  namespace: static
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portfolio
+  
+  template:
+    metadata:
+      labels:
+        app: portfolio
+
+    spec:
+      containers:
+      - name: flask
+        image: schd1337/mywebsite:l2
+        ports:
+        - containerPort: 80   
+        env:
+        - name: HTML_PORT
+          value: "80"
+        - name: HTML_IP
+          value: "192.168.0.20"
+        - name: PORT
+          value: "80"
+---
+
+# service for this app
+apiVersion: v1
+kind: Service
+metadata:
+  name: mystatic-site-service
+  namespace: static
+spec:
+  type: ClusterIP
+  selector:
+    app: portfolio
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside cluster
+    port: 9000
+    # Port inside the container
+    targetPort: 80
