@@ -1,4 +1,6 @@
 #! /bin/bash
+
+echo "Insatlling Docker"
     # install docker
 sudo apt-get install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
@@ -11,3 +13,13 @@ echo \
 $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
 sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
+echo "Done..."
+
+echo "Minikube initialization"
+
+minikube start --driver=docker &&\
+minikube addons enable ingress &&\
+kubectl create namespace sololeveling  &&\
+kubectl create namespace static
+
+echo "Done..."
