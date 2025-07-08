@@ -6,6 +6,7 @@ project(SoloLeveling VERSION 1.0)
 
 # set include directories
 set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow/include")
+message(STATUS "DEBUG Location of crow include dir ${CROW_INCLUDE_DIR}")
 set(SQL_CONNECTION_HEADER /usr/include)
 set(CUSTOM_INCLUDES "${CMAKE_SOURCE_DIR}/include")
 
