@@ -5,8 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(SoloLeveling VERSION 1.0)
 
 # set include directories
-set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow/include")
-message(STATUS "DEBUG Location of crow include dir ${CROW_INCLUDE_DIR}")
+set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow")
 set(SQL_CONNECTION_HEADER /usr/include)
 set(CUSTOM_INCLUDES "${CMAKE_SOURCE_DIR}/include")
 
@@ -20,13 +19,13 @@ set(SQL_CONNECTION_LIB /usr/lib/aarch64-linux-gnu/libmysqlcppconn.so)      # aar
 add_executable(SoloLeveling main.cpp)
 
 # Add the include directories to the target
-target_include_directories(SoloLeveling PRIVATE ${CROW_INCLUDE_DIR})
-target_include_directories(SoloLeveling PRIVATE ${SQL_CONNECTION_HEADER})
-target_include_directories(SoloLeveling PRIVATE ${CUSTOM_INCLUDES})
+target_include_directories(SoloLeveling PRIVATE ${CROW_INCLUDE_DIR}
+                                                ${SQL_CONNECTION_HEADER}
+                                                ${CUSTOM_INCLUDES})
 
 #add_subdirectory("${CMAKE_SOURCE_DIR}/libraries")  # alternative to glob with more modular control on which library to add and which to not
 add_subdirectory(libraries)
 
 # Link libraries to the final executable
-target_link_libraries(SoloLeveling PRIVATE ${SQL_CONNECTION_LIB})
-target_link_libraries(SoloLeveling PRIVATE CUSTOM_INCLUDE_LIBRARIES)
+target_link_libraries(SoloLeveling PRIVATE ${SQL_CONNECTION_LIB}
+                                            CUSTOM_INCLUDE_LIBRARIES)
