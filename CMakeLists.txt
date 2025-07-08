@@ -18,7 +18,6 @@ set(CUSTOM_INCLUDES "${CMAKE_SOURCE_DIR}/include")
 set(SQL_CONNECTION_LIB /usr/lib/aarch64-linux-gnu/libmysqlcppconn.so)      # aarch gnu for rasberry pi
 #file(GLOB_RECURSE CUSTOM_INCLUDE_LIBRARIES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/libraries/*.cpp")     # add all library
 
-
 # executable name SoloLeveling
 #add_executable(SoloLeveling main.cpp ${CUSTOM_INCLUDE_LIBRARIES})
 add_executable(SoloLeveling main.cpp)
