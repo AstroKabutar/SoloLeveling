@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: flask
-        image: schd1337/mywebsite:l2
+        image: schd1337/mywebsite:latest
         ports:
         - containerPort: 80   
         env:
