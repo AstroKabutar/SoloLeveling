@@ -5,11 +5,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(SoloLeveling VERSION 1.0)
 
 # set include directories
-#set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow"
-#                     "${CMAKE_SOURCE_DIR}/crow/include")
+set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow"
+                     "${CMAKE_SOURCE_DIR}/crow/include")
 
-file(GLOB_RECURSE CROW_INCLUDE_DIR CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/crow/*.h")
-message(STATUS "${CROW_INCLUDE_DIR}")
+#file(GLOB_RECURSE CROW_INCLUDE_DIR CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/crow/*.h")
+#message(STATUS "${CROW_INCLUDE_DIR}")
 
 
 set(SQL_CONNECTION_HEADER /usr/include)
