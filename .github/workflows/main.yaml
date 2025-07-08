@@ -3,30 +3,31 @@ name: CI/CD for my project
 on: push
 
 jobs:
-  if: github.ref == 'refs/heads/main'
-
-  runs-on: ubuntu-24.04-arm
-  steps:
-  - uses: actions/checkout@v3
-
-  - name: Installing dependencies and compiling the code
-    run: |
-          apt-get update
-          apt install libmysqlcppconn-dev cmake make -y
-          mkdir -p build
-          cd build
-          camke ..
-          make
-          mv SoloLeveling ../
-          cd ../
-    shell: bash
+  compile-build_image-push:
+    if: github.ref == 'refs/heads/main'
   
-  - name: Create a docker image of the application
-    run: docker build -t schd1337/portfolioapp:latest .
-    shell: bash
-
-  - name: Push Docker image into the dockerhub
-    run: |
-          echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker push schd1337/portfolioapp:latest
-    shell: bash
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - uses: actions/checkout@v3
+  
+    - name: Installing dependencies and compiling the code
+      run: |
+            apt-get update
+            apt install libmysqlcppconn-dev cmake make -y
+            mkdir -p build
+            cd build
+            camke ..
+            make
+            mv SoloLeveling ../
+            cd ../
+      shell: bash
+    
+    - name: Create a docker image of the application
+      run: docker build -t schd1337/portfolioapp:latest .
+      shell: bash
+  
+    - name: Push Docker image into the dockerhub
+      run: |
+            echo ${{ secrets.DOCKER_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+            docker push schd1337/portfolioapp:latest
+      shell: bash
