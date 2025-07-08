@@ -9,7 +9,7 @@ set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow/include"
                      "${CMAKE_SOURCE_DIR}/crow")
 
 #file(GLOB_RECURSE CROW_INCLUDE_DIR CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/crow/*.h")
-#message(STATUS "${CROW_INCLUDE_DIR}")
+message(STATUS "${CROW_INCLUDE_DIR}")
 
 set(SQL_CONNECTION_HEADER /usr/include)
 set(CUSTOM_INCLUDES "${CMAKE_SOURCE_DIR}/include")
