@@ -20,7 +20,7 @@ set(SQL_CONNECTION_LIB /usr/lib/aarch64-linux-gnu/libmysqlcppconn.so)      # aar
 add_executable(SoloLeveling main.cpp)
 
 # Add the include directories to the target
-target_include_directories(SoloLeveling PRIVATE ${CROW_INCLUDE_DIR}
+target_include_directories(SoloLeveling PUBLIC ${CROW_INCLUDE_DIR}
                                                 ${SQL_CONNECTION_HEADER}
                                                 ${CUSTOM_INCLUDES})
 
