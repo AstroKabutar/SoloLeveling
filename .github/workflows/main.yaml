@@ -16,7 +16,7 @@ jobs:
             sudo apt install libmysqlcppconn-dev cmake make -y
             mkdir -p build
             cd build
-            camke ..
+            cmake ..
             make
             mv SoloLeveling ../
             cd ../
