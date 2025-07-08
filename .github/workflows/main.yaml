@@ -15,6 +15,9 @@ jobs:
             sudo apt-get update
             sudo apt install libmysqlcppconn-dev cmake make -y
             mkdir -p build
+            #debug
+            ls -l
+            ls -l crow
             cd build
             cmake ..
             make
