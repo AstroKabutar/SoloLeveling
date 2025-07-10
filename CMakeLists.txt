@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(SoloLeveling VERSION 1.0)
 
 # set include directories
-set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow/crow")
-#                     "${CMAKE_SOURCE_DIR}/crow")
+set(CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/crow/crow"
+                     "${CMAKE_SOURCE_DIR}/crow")
 
 #set (CROW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}")
 
