@@ -13,7 +13,7 @@ jobs:
     - name: Installing dependencies and compiling the code
       run: |
             sudo apt-get update
-            sudo apt install libmysqlcppconn-dev cmake make -y
+            sudo apt install libmysqlcppconn-dev libasio-dev cmake make -y
             mkdir -p build
             pwd
             ls -l
