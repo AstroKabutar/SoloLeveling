@@ -7,7 +7,7 @@ services:
       - 5000:5000
       
   solo-test:
-    image: schd1337/portfolioapp:l1
+    image: portfolio:v1
     container_name: solo-test
     env_file:
     - ENV/Mysql.env

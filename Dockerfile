@@ -2,11 +2,7 @@ FROM debian:stable-slim
 
 RUN apt-get update &&\
     apt-get upgrade -y &&\
-    apt install libmysqlcppconn-dev gettext libc6 libstdc++6 -y
-
-RUN echo "-----------DEBUG LIBRARY TEST---------------" &&\
-    dpkg -L  libstdc++6 &&\
-    dpkg -L  libc6
+    apt install libmysqlcppconn-dev gettext libtool gcc gcc-libs -y
 
 COPY . /SoloLeveling
 RUN chmod 755 -R /SoloLeveling
