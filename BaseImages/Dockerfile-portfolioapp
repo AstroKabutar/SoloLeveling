@@ -1,0 +1,8 @@
+FROM debian:stable-slim
+
+RUN apt-get update &&\
+    apt-get upgrade -y &&\
+    apt install libmysqlcppconn-dev gettext -y
+
+# docker build -fDockerfile-portfolioapp -t schd1337/portfolioapp:baseimage .
+# docker push schd1337/portfolioapp:baseimage
