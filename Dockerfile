@@ -1,6 +1,7 @@
 FROM debian:stable-slim
 
 RUN apt-get update &&\
+    apt-get upgrade -y &&\
     apt install libmysqlcppconn-dev gettext -y
 
 COPY . /SoloLeveling
