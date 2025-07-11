@@ -15,8 +15,6 @@ jobs:
             sudo apt-get update
             sudo apt install libmysqlcppconn-dev libasio-dev cmake make -y
             mkdir -p build
-            pwd
-            ls -l
             cd build
             cmake ../
             make
