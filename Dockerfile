@@ -4,6 +4,10 @@ RUN apt-get update &&\
     apt-get upgrade -y &&\
     apt install libmysqlcppconn-dev gettext libc6 libstdc++6 -y
 
+RUN echo "-----------DEBUG LIBRARY TEST---------------" &&\
+    dpkg -L  libstdc++6 &&\
+    dpkg -L  libc6
+
 COPY . /SoloLeveling
 RUN chmod 755 -R /SoloLeveling
 WORKDIR /SoloLeveling
