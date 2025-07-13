@@ -1,6 +1,6 @@
 #! /bin/bash
 
-clear
+#clear
 
 # upping the mysql docker
 #docker compose up -d
@@ -13,33 +13,33 @@ cmake ..
 make
 
 # delay for letting the database to start
-time=3;
-
-# waiting time for the mysql docker container to start up
-for((i=time; ; --i)); do
-    if((i == 0)); then
-        echo "Starting Application...";
-        break;
-    fi
-
-    echo -ne "Starting Application in ...${i} sec [/] \r";
-    sleep 0.2;
-    echo -ne "Starting Application in ...${i} sec [-] \r";
-    sleep 0.2;
-    echo -ne "Starting Application in ...${i} sec [|] \r";
-    sleep 0.2;
-    echo -ne "Starting Application in ...${i} sec [-] \r";
-    sleep 0.2;
-    echo -ne "Starting Application in ...${i} sec [\\] \r";
-    sleep 0.2;
-
-
-done
-
-cd ..
-
-rm SoloLeveling
-mv ./build/SoloLeveling .
+#time=3;
+#
+## waiting time for the mysql docker container to start up
+#for((i=time; ; --i)); do
+#    if((i == 0)); then
+#        echo "Starting Application...";
+#        break;
+#    fi
+#
+#    echo -ne "Starting Application in ...${i} sec [/] \r";
+#    sleep 0.2;
+#    echo -ne "Starting Application in ...${i} sec [-] \r";
+#    sleep 0.2;
+#    echo -ne "Starting Application in ...${i} sec [|] \r";
+#    sleep 0.2;
+#    echo -ne "Starting Application in ...${i} sec [-] \r";
+#    sleep 0.2;
+#    echo -ne "Starting Application in ...${i} sec [\\] \r";
+#    sleep 0.2;
+#
+#
+#done
+#
+#cd ..
+#
+#rm SoloLeveling
+cp ./build/SoloLeveling .
 
 # begin running the executable
 #cp build/SoloLeveling .

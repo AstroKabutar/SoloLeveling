@@ -7,7 +7,7 @@ services:
       - 5000:5000
       
   solo-test:
-    image: portfolio:v1
+    image: test:v2
     container_name: solo-test
     env_file:
     - ENV/Mysql.env

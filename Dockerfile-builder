@@ -1,0 +1,22 @@
+FROM schd1337/baseimages:sololeveling AS base-builder
+
+RUN mkdir -p /build-app/build
+
+WORKDIR /
+
+COPY <<EOF  /build.sh
+#! /bin/bash
+cd /build-app/build
+cmake ../
+make
+cp SoloLeveling /build-app
+cd ..
+rm -r build
+echo "Build Successfull"
+EOF
+
+CMD ["bash","build.sh"]
+
+# docker build -t schd1337/portfolioapp:compiler -f Dockerfile-builder .
+# docker push schd1337/portfolioapp:compiler
+# docker run --rm -v $PWD:/build-app:rw schd1337/portfolioapp:compiler
