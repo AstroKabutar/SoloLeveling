@@ -31,7 +31,6 @@ jobs:
             chmod 600 $PWD/ec2.pem
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "git clone https://github.com/AstroKabutar/SoloLeveling.git"
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "cd SoloLeveling && git switch website"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/dbdeploy.yaml"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/project-upskill.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/mystatic-site.yaml"
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-43-205-241-114.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
       shell: bash      
