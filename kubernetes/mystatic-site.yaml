@@ -24,7 +24,7 @@ spec:
         - name: HTML_PORT
           value: "80"
         - name: HTML_IP
-          value: "192.168.0.20"
+          value: "shahin.zita.click"
         - name: PORT
           value: "80"
 ---
