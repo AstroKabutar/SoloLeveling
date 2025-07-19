@@ -6,7 +6,7 @@ RUN chmod 755 -R /SoloLeveling
 EXPOSE 80
 
 # Node exporter port
-EXPOSE 6000
+#EXPOSE 6000
 
 CMD ["bash", "Start.sh"]
 

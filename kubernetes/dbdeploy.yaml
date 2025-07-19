@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mysqldb
-        image: schd1337/portfoliodb:v3
+        image: schd1337/portfoliodb:v4
 ---
 # service for this db
 apiVersion: v1

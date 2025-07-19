@@ -13,6 +13,7 @@ Jenkinsfile
 main.cpp
 Mysql.cpp
 Notes.md
+node_exporter
 StartProgram.sh
 test.yaml
 Users.sql
