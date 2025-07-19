@@ -29,9 +29,9 @@ jobs:
       run: |
             echo "${{ secrets.EC2_KEY }}" | tee $PWD/ec2.pem
             chmod 600 $PWD/ec2.pem
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-127-151-3.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-127-151-3.ap-south-1.compute.amazonaws.com "git clone https://github.com/AstroKabutar/SoloLeveling.git"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-127-151-3.ap-south-1.compute.amazonaws.com "cd SoloLeveling && git switch website"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-127-151-3.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/mystatic-site.yaml"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-127-151-3.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "git clone https://github.com/AstroKabutar/SoloLeveling.git"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "cd SoloLeveling && git switch website"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/mystatic-site.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
       shell: bash      
