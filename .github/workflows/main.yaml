@@ -33,9 +33,9 @@ jobs:
       run: |
             echo "${{ secrets.EC2_KEY }}" | tee $PWD/ec2.pem
             chmod 600 $PWD/ec2.pem
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-232-146-3.ap-south-1.compute.amazonaws.com "git clone https://github.com/AstroKabutar/SoloLeveling.git"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-232-146-3.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/dbdeploy.yaml"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-232-146-3.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/project-upskill.yaml"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-232-146-3.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/ingress.yaml"
-            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-232-146-3.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-65-1-136-152.ap-south-1.compute.amazonaws.com "git clone https://github.com/AstroKabutar/SoloLeveling.git"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-65-1-136-152.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/dbdeploy.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-65-1-136-152.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/project-upskill.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-65-1-136-152.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/ingress.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-65-1-136-152.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
       shell: bash            

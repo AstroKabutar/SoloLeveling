@@ -4,7 +4,7 @@ metadata:
   name: solo-leveling
   namespace: sololeveling
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       project: sololeveling
