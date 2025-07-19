@@ -18,10 +18,10 @@ Setup::Setup(Mysql& mysql)
     mysql.querry(firstrun::tasks); 
 
     // filling the importance
-    mysql.querry(firstrun::impS);
-    mysql.querry(firstrun::impA);
-    mysql.querry(firstrun::impB);
-    mysql.querry(firstrun::impC);
-    mysql.querry(firstrun::impD);
-    mysql.querry(firstrun::impE);
+    //mysql.querry(firstrun::impS);
+    //mysql.querry(firstrun::impA);
+    //mysql.querry(firstrun::impB);
+    //mysql.querry(firstrun::impC);
+    //mysql.querry(firstrun::impD);
+    //mysql.querry(firstrun::impE);
 }
