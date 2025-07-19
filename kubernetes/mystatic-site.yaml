@@ -4,7 +4,7 @@ metadata:
   name: mystatic-site
   namespace: static
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: portfolio
