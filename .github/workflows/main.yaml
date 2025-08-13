@@ -37,5 +37,7 @@ jobs:
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/dbdeploy.yaml"
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/project-upskill.yaml"
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "kubectl apply -f SoloLeveling/kubernetes/ingress.yaml"
+            ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "bash SoloLeveling/podrestart.sh"
             ssh -o "StrictHostKeyChecking=no" -i "ec2.pem" admin@ec2-13-235-247-44.ap-south-1.compute.amazonaws.com "rm -rf SoloLeveling"
+
       shell: bash            
