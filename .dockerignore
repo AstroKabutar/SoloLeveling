@@ -2,3 +2,4 @@ README.MD
 Dockerfile
 vars.env
 /kubernetes
+podrestart.sh

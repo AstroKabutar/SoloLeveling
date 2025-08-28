@@ -25,6 +25,8 @@ spec:
           value: "80"
         - name: HTML_IP
           value: "shahin.zita.click"
+        - name: PORT
+          value: "80"
 ---
 
 # service for this app
