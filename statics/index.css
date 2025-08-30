@@ -1,3 +1,9 @@
+.position-footer
+{
+    position: relative;
+    left: -300px;
+}
+
 body
 {
     color: lime;
