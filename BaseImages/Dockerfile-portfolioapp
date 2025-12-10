@@ -1,8 +1,0 @@
-FROM debian:stable-slim
-
-RUN apt-get update &&\
-    apt-get upgrade -y &&\
-    apt install libmysqlcppconn-dev gettext libasio-dev cmake make gcc g++ -y
-
-# docker build -fDockerfile-portfolioapp -t schd1337/baseimages:sololeveling .
-# docker push schd1337/baseimages:sololeveling
